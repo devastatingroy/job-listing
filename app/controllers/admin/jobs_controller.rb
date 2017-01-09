@@ -1,12 +1,13 @@
 class Admin::JobsController < ApplicationController
   before_filter :authenticate_user, only:[:new,:create,:edit,:update,:destroy]
   before_filter :require_is_admin
-  def index
-    @jobs = Job.all
-  end
 
   def show
-    @job= Job.find(params[:id])
+    @job = Job.find(params[:id])
+  end
+
+  def index
+    @jobs = Job.all
   end
 
   def new
@@ -37,7 +38,7 @@ class Admin::JobsController < ApplicationController
   end
 private
   def job_params
-    params.require(:job).permit(:title, :description)
+    params.require(:job).permit(:title, :description, :wage_lower_bound, :wage_upper_bound, :contact_email, :is_hidden)
   end
 
 
